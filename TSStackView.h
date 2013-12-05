@@ -29,4 +29,17 @@
  */
 - (void)resumeAutoLayoutWhenSubviewVisibilityChanges;
 
+/*!
+ 
+ Hide all views in gravity
+ 
+ */
+- (void)hideViewsInGravity:(NSStackViewGravity)gravity;
+
+/*!
+ 
+ Show all views in gravity
+ 
+ */
+- (void)showViewsInGravity:(NSStackViewGravity)gravity;
 @end

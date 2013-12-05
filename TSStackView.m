@@ -93,6 +93,28 @@ char BPContextHidden;
     return self.observedViews[@(gravity)];
 }
 
+#pragma mark -
+#pragma mark Visibility
+
+- (void)hideViewsInGravity:(NSStackViewGravity)gravity
+{
+    [self hideViews:[self viewsInGravity:gravity]];
+}
+
+- (void)showViewsInGravity:(NSStackViewGravity)gravity
+{
+    [self showViews:[self viewsInGravity:gravity]];
+}
+
+- (void)showViews:(NSArray *)views
+{
+    for (NSView *view in views) view.hidden = YES;
+}
+
+- (void)hideViews:(NSArray *)views
+{
+    for (NSView *view in views) view.hidden = YES;
+}
 
 #pragma mark -
 #pragma mark Gravity
