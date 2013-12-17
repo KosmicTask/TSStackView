@@ -7,15 +7,32 @@
 //
 
 #import "TSStackView.h"
+#import "TSClipView.h"
+
+@interface NSView (TSStackView)
++ (void)ts_disableTranslatesAutoresizingMaskIntoConstraints:(NSArray *)views;
+- (void)ts_disableTranslatesAutoresizingMaskIntoConstraints:(NSArray *)views;
+@end
 
 char BPContextHidden;
 
 @interface TSStackView ()
 @property (strong) NSMutableDictionary *observedViews;
 @property BOOL doLayout;
+@property (strong) NSArray *stackViewConstraints;
+
 @end
 
 @implementation TSStackView
+
+#pragma mark -
+#pragma mark Factory
+
++ (id) stackViewWithViews:(NSArray *)views
+{
+    [self ts_disableTranslatesAutoresizingMaskIntoConstraints:views];
+    return [super stackViewWithViews:views];
+}
 
 #pragma mark -
 #pragma mark Setup
@@ -59,6 +76,7 @@ char BPContextHidden;
 
 - (void)setViews:(NSArray *)views inGravity:(NSStackViewGravity)gravity
 {
+    [self ts_disableTranslatesAutoresizingMaskIntoConstraints:views];
     [self setObservedViews:views inGravity:gravity];
     [self setVisibleViews:views inGravity:gravity];
 }
@@ -185,4 +203,56 @@ char BPContextHidden;
     }
 }
 
+
+#pragma mark -
+#pragma mark Embedding
+
+- (NSScrollView *)embedInScrollView
+{
+    // allocate scroll view
+    NSScrollView *scrollView = [[NSScrollView alloc] initWithFrame:NSMakeRect(0, 0, 100, 100)];
+    scrollView.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    // allocate flipped clip view
+    TSClipView *clipView = [[TSClipView alloc] initWithFrame:scrollView.contentView.frame];
+    scrollView.contentView = clipView;
+    NSAssert(scrollView.contentView.isFlipped, @"ScrollView contenView must be flipped? Use TSClipView");
+    
+    // configure the scrollview
+    scrollView.hasHorizontalScroller = YES;
+    scrollView.hasVerticalScroller = YES;
+    scrollView.autohidesScrollers = YES;
+    
+    // stackview is the document
+    scrollView.documentView = self;
+    
+    // constrain stackview to match dimension of scrollview
+    NSDictionary *viewsDict = NSDictionaryOfVariableBindings(self);
+    NSString *vfl = nil;
+    if (self.orientation == NSUserInterfaceLayoutOrientationVertical) {
+        vfl = @"H:|-0-[self]-0-|";
+    } else {
+        vfl = @"V:|-0-[self]-0-|";
+    }
+    self.stackViewConstraints = [NSLayoutConstraint constraintsWithVisualFormat:vfl options:0 metrics:nil views:viewsDict];
+    
+    [scrollView addConstraints:self.stackViewConstraints];
+    
+    return scrollView;
+}
+@end
+
+@implementation NSView (TSStackView)
+
++ (void)ts_disableTranslatesAutoresizingMaskIntoConstraints:(NSArray *)views
+{
+    for (NSView *view in views) {
+        view.translatesAutoresizingMaskIntoConstraints = NO;;
+    }
+}
+
+- (void)ts_disableTranslatesAutoresizingMaskIntoConstraints:(NSArray *)views
+{
+    [[self class] ts_disableTranslatesAutoresizingMaskIntoConstraints:views];
+}
 @end

@@ -42,4 +42,12 @@
  
  */
 - (void)showViewsInGravity:(NSStackViewGravity)gravity;
+
+
+/*!
+ 
+ Embed view in a scroll view and add constraints to match the stackview width to the scrollview width.
+ 
+ */
+- (NSScrollView *)embedInScrollView;
 @end
