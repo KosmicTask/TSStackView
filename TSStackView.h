@@ -46,8 +46,8 @@
 
 /*!
  
- Embed view in a scroll view and add constraints to match the stackview width to the scrollview width.
+ Scroll view container with constraints to match the stackview width to the scrollview width.
  
  */
-- (NSScrollView *)embedInScrollView;
+@property (strong, nonatomic, readonly) NSScrollView *scrollViewContainer;
 @end

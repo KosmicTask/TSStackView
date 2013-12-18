@@ -5,7 +5,7 @@ TSStackView
 
 The subclass retains all views passed to `setViews:inGravity` and performs layout as required when subview visibility changes are observed. This behaviour mimics the behaviour of the WPF `StackPanel`.
 
-The `-embedInScrollView` method can be used to embed the stack in a `NSScrollView` instance.
+The `-scrollViewContainer` property can be used to create and retrieve a `NSScrollView` instance that wraps the stack view.
 
 Usage
 =====
@@ -34,7 +34,7 @@ Usage
     	[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(foo) userInfo:nil repeats:YES];
 
 		// wrap the stack in a scroll view and ...
-		NSScrollView *scrollView = [stackView embedInScrollView];
+		NSScrollView *scrollView = [stackView scrollViewContainer];
 	}
 
 	- (void)foo

@@ -20,7 +20,7 @@ char BPContextHidden;
 @property (strong) NSMutableDictionary *observedViews;
 @property BOOL doLayout;
 @property (strong) NSArray *stackViewConstraints;
-
+@property (strong, nonatomic, readwrite) NSScrollView *scrollViewContainer;
 @end
 
 @implementation TSStackView
@@ -206,40 +206,42 @@ char BPContextHidden;
 
 #pragma mark -
 #pragma mark Embedding
-
-- (NSScrollView *)embedInScrollView
+- (NSScrollView *)scrollViewContainer
 {
-    // allocate scroll view
-    NSScrollView *scrollView = [[NSScrollView alloc] initWithFrame:NSMakeRect(0, 0, 100, 100)];
-    scrollView.translatesAutoresizingMaskIntoConstraints = NO;
+    if (!_scrollViewContainer) {
+        // allocate scroll view
+        NSScrollView *scrollView = [[NSScrollView alloc] initWithFrame:NSMakeRect(0, 0, 100, 100)];
+        scrollView.translatesAutoresizingMaskIntoConstraints = NO;
 
-    // allocate flipped clip view
-    TSClipView *clipView = [[TSClipView alloc] initWithFrame:scrollView.contentView.frame];
-    scrollView.contentView = clipView;
-    NSAssert(scrollView.contentView.isFlipped, @"ScrollView contenView must be flipped? Use TSClipView");
-    
-    // configure the scrollview
-    scrollView.borderType = NSNoBorder;
-    scrollView.hasHorizontalScroller = YES;
-    scrollView.hasVerticalScroller = YES;
-    scrollView.autohidesScrollers = YES;
-    
-    // stackview is the document
-    scrollView.documentView = self;
-    
-    // constrain stackview to match dimension of scrollview
-    NSDictionary *viewsDict = NSDictionaryOfVariableBindings(self);
-    NSString *vfl = nil;
-    if (self.orientation == NSUserInterfaceLayoutOrientationVertical) {
-        vfl = @"H:|-0-[self]-0-|";
-    } else {
-        vfl = @"V:|-0-[self]-0-|";
+        // allocate flipped clip view
+        TSClipView *clipView = [[TSClipView alloc] initWithFrame:scrollView.contentView.frame];
+        scrollView.contentView = clipView;
+        NSAssert(scrollView.contentView.isFlipped, @"ScrollView contenView must be flipped? Use TSClipView");
+        
+        // configure the scrollview
+        scrollView.borderType = NSNoBorder;
+        scrollView.hasHorizontalScroller = YES;
+        scrollView.hasVerticalScroller = YES;
+        scrollView.autohidesScrollers = YES;
+        
+        // stackview is the document
+        scrollView.documentView = self;
+        
+        // constrain stackview to match dimension of scrollview
+        NSDictionary *viewsDict = NSDictionaryOfVariableBindings(self);
+        NSString *vfl = nil;
+        if (self.orientation == NSUserInterfaceLayoutOrientationVertical) {
+            vfl = @"H:|-0-[self]-0-|";
+        } else {
+            vfl = @"V:|-0-[self]-0-|";
+        }
+        self.stackViewConstraints = [NSLayoutConstraint constraintsWithVisualFormat:vfl options:0 metrics:nil views:viewsDict];
+        
+        [scrollView addConstraints:self.stackViewConstraints];
+        
+        self.scrollViewContainer = scrollView;
     }
-    self.stackViewConstraints = [NSLayoutConstraint constraintsWithVisualFormat:vfl options:0 metrics:nil views:viewsDict];
-    
-    [scrollView addConstraints:self.stackViewConstraints];
-    
-    return scrollView;
+    return _scrollViewContainer;
 }
 @end
 
