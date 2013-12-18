@@ -212,13 +212,14 @@ char BPContextHidden;
     // allocate scroll view
     NSScrollView *scrollView = [[NSScrollView alloc] initWithFrame:NSMakeRect(0, 0, 100, 100)];
     scrollView.translatesAutoresizingMaskIntoConstraints = NO;
-    
+
     // allocate flipped clip view
     TSClipView *clipView = [[TSClipView alloc] initWithFrame:scrollView.contentView.frame];
     scrollView.contentView = clipView;
     NSAssert(scrollView.contentView.isFlipped, @"ScrollView contenView must be flipped? Use TSClipView");
     
     // configure the scrollview
+    scrollView.borderType = NSNoBorder;
     scrollView.hasHorizontalScroller = YES;
     scrollView.hasVerticalScroller = YES;
     scrollView.autohidesScrollers = YES;
