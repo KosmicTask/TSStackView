@@ -30,8 +30,10 @@ char BPContextHidden;
 
 + (id) stackViewWithViews:(NSArray *)views
 {
+    // the super call guarantees that self.translatesAutoresizingMaskIntoConstraints == NO
     [self ts_disableTranslatesAutoresizingMaskIntoConstraints:views];
-    return [super stackViewWithViews:views];
+    NSStackView *stackView = [super stackViewWithViews:views];
+    return stackView;
 }
 
 #pragma mark -
@@ -209,6 +211,7 @@ char BPContextHidden;
 - (NSScrollView *)scrollViewContainer
 {
     if (!_scrollViewContainer) {
+        
         // allocate scroll view
         NSScrollView *scrollView = [[NSScrollView alloc] initWithFrame:NSMakeRect(0, 0, 100, 100)];
         scrollView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -250,7 +253,7 @@ char BPContextHidden;
 + (void)ts_disableTranslatesAutoresizingMaskIntoConstraints:(NSArray *)views
 {
     for (NSView *view in views) {
-        view.translatesAutoresizingMaskIntoConstraints = NO;;
+        view.translatesAutoresizingMaskIntoConstraints = NO;
     }
 }
 

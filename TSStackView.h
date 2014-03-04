@@ -10,7 +10,22 @@
 
 @interface TSStackView : NSStackView
 
-
+/*
+ 
+ TSStackView works by observing NSView -hidden and swapping out hidden views.
+ NSStackView calls -fittingSize to determine the minimum size of its subviews.
+ If a view's width or height is not constrained to a value (say the right or bottom
+ spacing to the superview is missing) then the fitting size will be 0 in that dimension
+ and the view will not be displayed.
+ 
+ Given the above, other approaches to obtaining the same behaviour could therefore include:
+ 
+ 1. Add and remove internal constraints to cause the fittingSize for views to collapse.
+ 2. Add and remove additional external zero dimension constraints to override the internal constraints.
+ 
+ 2 sounds okay better and perhaps more in keeping with the spirit of Auto Layout than the current implementation.
+ 
+ */
 /*!
  
  Suspend auto layout triggered by change in subview visibility.
