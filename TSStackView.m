@@ -5,9 +5,11 @@
 //  Created by Jonathan Mitchell on 04/12/2013.
 //  Copyright (c) 2013 Thesaurus Software Limited. All rights reserved.
 //
-
 #import "TSStackView.h"
 #import "TSClipView.h"
+
+#define TS_LOG_SUBTREE
+#undef TS_LOG_SUBTREE   // comment this to log the subtree
 
 @interface NSView (TSStackView)
 + (void)ts_disableTranslatesAutoresizingMaskIntoConstraints:(NSArray *)views;
@@ -71,16 +73,6 @@ char BPContextHidden;
     [self removeViewObservations:self.observedViews[@(NSStackViewGravityTop)]];
     [self removeViewObservations:self.observedViews[@(NSStackViewGravityCenter)]];
     [self removeViewObservations:self.observedViews[@(NSStackViewGravityBottom)]];
-}
-
-#pragma mark -
-#pragma mark Views
-
-- (void)setViews:(NSArray *)views inGravity:(NSStackViewGravity)gravity
-{
-    [self ts_disableTranslatesAutoresizingMaskIntoConstraints:views];
-    [self setObservedViews:views inGravity:gravity];
-    [self setVisibleViews:views inGravity:gravity];
 }
 
 #pragma mark -
@@ -205,6 +197,100 @@ char BPContextHidden;
     }
 }
 
+- (NSSize)intrinsicContentSize
+{
+    CGFloat intrinsicWidth = NSViewNoInstrinsicMetric;
+    CGFloat intrinsicHeight = NSViewNoInstrinsicMetric;
+    
+    // This method makes assumptions about how the internal views are laid out.
+    // The assumptions are reasonable based on the published geometry for NSStackView.
+    // However, future changes to NSStackView may cause this method to misbehave.
+    
+    // calculate intrinsic content height.
+    if (self.intrinsicContentSizeOptions & TSIntrinsicContentSizeHeight) {
+        intrinsicHeight = 0;
+        intrinsicHeight += (self.edgeInsets.top + self.edgeInsets.bottom);  // inset
+        
+        for (NSView *view in self.views) {
+            intrinsicHeight += view.frame.size.height;
+            
+            // spacing
+            if (view != self.views.lastObject) {
+                CGFloat viewSpacing = [self customSpacingAfterView:view];
+                if (viewSpacing == NSStackViewSpacingUseDefault) {
+                    viewSpacing = self.spacing;
+                }
+                intrinsicHeight += viewSpacing;
+            }
+        }
+    }
+
+    // calculate intrinsic content width
+    if (self.intrinsicContentSizeOptions & TSIntrinsicContentSizeWidth) {
+        intrinsicWidth = 0;
+        intrinsicWidth += (self.edgeInsets.left + self.edgeInsets.right);   // inset
+        
+        for (NSView *view in self.views) {
+            intrinsicWidth += view.frame.size.width;
+            
+            // spacing
+            if (view != self.views.lastObject) {
+                CGFloat viewSpacing = [self customSpacingAfterView:view];
+                if (viewSpacing == NSStackViewSpacingUseDefault) {
+                    viewSpacing = self.spacing;
+                }
+                intrinsicWidth += viewSpacing;
+            }
+        }
+    }
+
+#ifdef TS_LOG_SUBTREE
+    if (self.intrinsicContentSizeOptions != TSIntrinsicContentSizeNone) {
+        NSLog(@"%@ _subtreeDescription = %@", self, [self performSelector:@selector(_subtreeDescription)]);
+    }
+#endif
+    
+    return NSMakeSize(intrinsicWidth, intrinsicHeight);
+}
+
+- (void)setIntrinsicContentSizeOptions:(TSIntrinsicContentSize)intrinsicSizeOptions
+{
+    _intrinsicContentSizeOptions = intrinsicSizeOptions;
+    [self invalidateIntrinsicContentSize];
+}
+
+#pragma mark -
+#pragma mark Adding and removing views
+
+- (void)setViews:(NSArray *)views inGravity:(NSStackViewGravity)gravity
+{
+    [self ts_disableTranslatesAutoresizingMaskIntoConstraints:views];
+    [self setObservedViews:views inGravity:gravity];
+    [self setVisibleViews:views inGravity:gravity];
+    
+    [self invalidateIntrinsicContentSize];
+}
+
+- (void)addView:(NSView *)aView inGravity:(NSStackViewGravity)gravity
+{
+    // TODO: add to observed/visible views
+    [super addView:aView inGravity:gravity];
+    [self invalidateIntrinsicContentSize];
+}
+
+- (void)insertView:(NSView *)aView atIndex:(NSUInteger)index inGravity:(NSStackViewGravity)gravity
+{
+    // TODO: add to observed/visible views
+    [super insertView:aView atIndex:index inGravity:gravity];
+    [self invalidateIntrinsicContentSize];
+}
+
+- (void)removeView:(NSView *)aView
+{
+    // TODO: remove from observed/visible views
+    [super removeView:aView];
+    [self invalidateIntrinsicContentSize];
+}
 
 #pragma mark -
 #pragma mark Embedding
@@ -246,6 +332,7 @@ char BPContextHidden;
     }
     return _scrollViewContainer;
 }
+
 @end
 
 @implementation NSView (TSStackView)

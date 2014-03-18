@@ -8,6 +8,12 @@
 
 #import <Cocoa/Cocoa.h>
 
+typedef NS_OPTIONS(NSUInteger, TSIntrinsicContentSize) {
+    TSIntrinsicContentSizeNone = 0 << 0,
+    TSIntrinsicContentSizeWidth = 1 << 0,
+    TSIntrinsicContentSizeHeight = 1 << 1,
+};
+
 @interface TSStackView : NSStackView
 
 /*
@@ -22,8 +28,6 @@
  
  1. Add and remove internal constraints to cause the fittingSize for views to collapse.
  2. Add and remove additional external zero dimension constraints to override the internal constraints.
- 
- 2 sounds okay better and perhaps more in keeping with the spirit of Auto Layout than the current implementation.
  
  */
 /*!
@@ -65,4 +69,11 @@
  
  */
 @property (strong, nonatomic, readonly) NSScrollView *scrollViewContainer;
+
+/*!
+ 
+ Set options to determine whether view reports an intrinsic content size.
+ 
+ */
+@property (assign, nonatomic) TSIntrinsicContentSize intrinsicContentSizeOptions;
 @end
