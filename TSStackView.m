@@ -150,17 +150,27 @@ char BPContextHidden;
 #pragma mark -
 #pragma mark KVO
 
+- (void)addViewObservation:(NSView *)view
+{
+    [view addObserver:self forKeyPath:@"hidden" options:nil context:&BPContextHidden];
+}
+
 - (void)addViewObservations:(NSArray *)views
 {
     for (NSView *view in views) {
-        [view addObserver:self forKeyPath:@"hidden" options:nil context:&BPContextHidden];
+        [self addViewObservation:view];
     }
+}
+
+- (void)removeViewObservation:(NSView *)view
+{
+    [view removeObserver:self forKeyPath:@"hidden"];
 }
 
 - (void)removeViewObservations:(NSArray *)views
 {
     for (NSView *view in views) {
-        [view removeObserver:self forKeyPath:@"hidden"];
+        [self removeViewObservation:view];
     }
 }
 
@@ -273,22 +283,38 @@ char BPContextHidden;
 
 - (void)addView:(NSView *)aView inGravity:(NSStackViewGravity)gravity
 {
-    // TODO: add to observed/visible views
-    [super addView:aView inGravity:gravity];
+    if (!aView.isHidden) {
+        [super addView:aView inGravity:gravity];
+    }
+    
+    [self.observedViews[@(gravity)] addObject:aView];
+    [self addViewObservation:aView];
+    
     [self invalidateIntrinsicContentSize];
 }
 
 - (void)insertView:(NSView *)aView atIndex:(NSUInteger)index inGravity:(NSStackViewGravity)gravity
 {
-    // TODO: add to observed/visible views
-    [super insertView:aView atIndex:index inGravity:gravity];
+    if (!aView.isHidden) {
+        [super insertView:aView atIndex:index inGravity:gravity];
+    }
+    
+    [self.observedViews[@(gravity)] addObject:aView];
+    [self addViewObservation:aView];
+
     [self invalidateIntrinsicContentSize];
 }
 
 - (void)removeView:(NSView *)aView
 {
-    // TODO: remove from observed/visible views
-    [super removeView:aView];
+    for (NSUInteger gravity = NSStackViewGravityTop; gravity <= NSStackViewGravityBottom; gravity++) {
+        if ([[self viewsInGravity:gravity] containsObject:aView]) {
+            [super removeView:aView];
+            [self removeViewObservation:aView];
+            [self.observedViews[@(gravity)] removeObject:aView];
+        }
+    }
+    
     [self invalidateIntrinsicContentSize];
 }
 
