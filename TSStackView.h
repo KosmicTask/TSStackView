@@ -76,4 +76,12 @@ typedef NS_OPTIONS(NSUInteger, TSIntrinsicContentSize) {
  
  */
 @property (assign, nonatomic) TSIntrinsicContentSize intrinsicContentSizeOptions;
+
+/*!
+ 
+ Background fill color.
+ 
+ */
+@property (strong, nonatomic) NSColor *backgroundColor;
+
 @end

@@ -359,6 +359,25 @@ char BPContextHidden;
     return _scrollViewContainer;
 }
 
+#pragma mark -
+#pragma mark drawing
+
+- (void)setBackgroundColor:(NSColor *)backgroundColor
+{
+    _backgroundColor = backgroundColor;
+    [self needsDisplay];
+}
+
+- (void)drawRect:(NSRect)dirtyRect
+{
+    if (self.backgroundColor) {
+        [[NSColor whiteColor] set];
+        NSRectFill(dirtyRect);
+    } else {
+        [super drawRect:dirtyRect];
+    }
+}
+
 @end
 
 @implementation NSView (TSStackView)
