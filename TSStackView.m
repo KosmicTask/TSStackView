@@ -86,6 +86,8 @@ char BPContextHidden;
         if (!view.isHidden) [visibleViews addObject:view];
     }
     [super setViews:visibleViews inGravity:gravity];
+    
+    [self invalidateIntrinsicContentSize];
 }
 
 #pragma mark -
