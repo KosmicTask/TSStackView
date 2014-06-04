@@ -224,8 +224,9 @@ char BPContextHidden;
         intrinsicHeight += (self.edgeInsets.top + self.edgeInsets.bottom);  // inset
         
         for (NSView *view in self.views) {
-            intrinsicHeight += view.frame.size.height;
             
+            intrinsicHeight += [view fittingSize].height;
+                                
             // spacing
             if (view != self.views.lastObject) {
                 CGFloat viewSpacing = [self customSpacingAfterView:view];
@@ -243,7 +244,8 @@ char BPContextHidden;
         intrinsicWidth += (self.edgeInsets.left + self.edgeInsets.right);   // inset
         
         for (NSView *view in self.views) {
-            intrinsicWidth += view.frame.size.width;
+            
+            intrinsicWidth += [view fittingSize].width;
             
             // spacing
             if (view != self.views.lastObject) {
