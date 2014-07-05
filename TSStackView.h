@@ -84,4 +84,11 @@ typedef NS_OPTIONS(NSUInteger, TSIntrinsicContentSize) {
  */
 @property (strong, nonatomic) NSColor *backgroundColor;
 
+/*!
+ 
+ Remove all views.
+ 
+ */
+- (void)removeAllViews;
+
 @end

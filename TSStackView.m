@@ -322,6 +322,13 @@ char BPContextHidden;
     [self invalidateIntrinsicContentSize];
 }
 
+- (void)removeAllViews
+{
+    for (NSView *view in [self.views copy]) {
+        [self removeView:view];
+    }
+}
+
 #pragma mark -
 #pragma mark Embedding
 - (NSScrollView *)scrollViewContainer
