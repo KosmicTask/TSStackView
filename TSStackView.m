@@ -23,6 +23,8 @@ char BPContextHidden;
 @property BOOL doLayout;
 @property (strong) NSArray *stackViewConstraints;
 @property (strong, nonatomic, readwrite) NSScrollView *scrollViewContainer;
+@property (strong) NSLayoutConstraint *autoContentHeightConstraint;
+@property (strong) NSLayoutConstraint *autoContentWidthConstraint;
 @end
 
 @implementation TSStackView
@@ -87,7 +89,7 @@ char BPContextHidden;
     }
     [super setViews:visibleViews inGravity:gravity];
     
-    [self invalidateIntrinsicContentSize];
+    [self invalidateContentSize];
 }
 
 #pragma mark -
@@ -97,7 +99,7 @@ char BPContextHidden;
 {
     [self removeViewObservations:[self observedViewsInGravity:gravity]];
     
-    self.observedViews[@(gravity)] = views;
+    self.observedViews[@(gravity)] = [NSMutableArray arrayWithArray:views];
     
     [self addViewObservations:[self observedViewsInGravity:gravity]];
 }
@@ -211,6 +213,12 @@ char BPContextHidden;
 
 - (NSSize)intrinsicContentSize
 {
+    /*
+     
+     This works reasonably well but it is likely better to use - autoContentSizeOptions
+     
+     */
+    
     CGFloat intrinsicWidth = NSViewNoInstrinsicMetric;
     CGFloat intrinsicHeight = NSViewNoInstrinsicMetric;
     
@@ -267,10 +275,64 @@ char BPContextHidden;
     return NSMakeSize(intrinsicWidth, intrinsicHeight);
 }
 
+#pragma mark -
+#pragma mark Accessors
+
+#pragma mark -
+#pragma mark Auto content size
+
+- (void)updateAutoContentSizeConstraints
+{
+    [self removeConstraint:self.autoContentHeightConstraint];
+    [self removeConstraint:self.autoContentWidthConstraint];
+
+    NSView *lastView = [self.views lastObject];
+    if (!lastView) {
+        return;
+    }
+    
+    /*
+     
+     Constrain the last subview to the bottom of the view
+     
+     */
+    if (self.autoContentSizeOptions & TSAutoContentSizeHeight) {
+        
+      self.autoContentHeightConstraint = [NSLayoutConstraint constraintWithItem:lastView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1.0 constant:self.edgeInsets.bottom];
+        
+        [self addConstraint:self.autoContentHeightConstraint];
+        
+    }
+    
+    /*
+     
+     Constrain the last subview to the right of the view
+     
+     */
+    if (self.autoContentSizeOptions & TSAutoContentSizeWidth) {
+        
+        self.autoContentWidthConstraint = [NSLayoutConstraint constraintWithItem:lastView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeRight multiplier:1.0 constant:self.edgeInsets.right];
+        
+        [self addConstraint:self.autoContentWidthConstraint];
+    }
+}
+
 - (void)setIntrinsicContentSizeOptions:(TSIntrinsicContentSize)intrinsicSizeOptions
 {
     _intrinsicContentSizeOptions = intrinsicSizeOptions;
+    [self invalidateContentSize];
+}
+
+- (void)setAutoContentSizeOptions:(TSAutoContentSize)autoContentSizeOptions
+{
+    _autoContentSizeOptions = autoContentSizeOptions;
+    [self updateAutoContentSizeConstraints];
+}
+
+- (void)invalidateContentSize
+{
     [self invalidateIntrinsicContentSize];
+    [self updateAutoContentSizeConstraints];
 }
 
 #pragma mark -
@@ -282,7 +344,7 @@ char BPContextHidden;
     [self setObservedViews:views inGravity:gravity];
     [self setVisibleViews:views inGravity:gravity];
     
-    [self invalidateIntrinsicContentSize];
+    [self invalidateContentSize];
 }
 
 - (void)addView:(NSView *)aView inGravity:(NSStackViewGravity)gravity
@@ -294,7 +356,7 @@ char BPContextHidden;
     [self.observedViews[@(gravity)] addObject:aView];
     [self addViewObservation:aView];
     
-    [self invalidateIntrinsicContentSize];
+    [self invalidateContentSize];
 }
 
 - (void)insertView:(NSView *)aView atIndex:(NSUInteger)index inGravity:(NSStackViewGravity)gravity
@@ -306,7 +368,7 @@ char BPContextHidden;
     [self.observedViews[@(gravity)] addObject:aView];
     [self addViewObservation:aView];
 
-    [self invalidateIntrinsicContentSize];
+    [self invalidateContentSize];
 }
 
 - (void)removeView:(NSView *)aView
@@ -319,7 +381,7 @@ char BPContextHidden;
         }
     }
     
-    [self invalidateIntrinsicContentSize];
+    [self invalidateContentSize];
 }
 
 - (void)removeAllViews

@@ -14,7 +14,20 @@ typedef NS_OPTIONS(NSUInteger, TSIntrinsicContentSize) {
     TSIntrinsicContentSizeHeight = 1 << 1,
 };
 
+typedef NS_OPTIONS(NSUInteger, TSAutoContentSize) {
+    TSAutoContentSizeNone = 0 << 0,
+    TSAutoContentSizeWidth = 1 << 0,
+    TSAutoContentSizeHeight = 1 << 1,
+};
+
 @interface TSStackView : NSStackView
+
+/*!
+ 
+ Set options to determine whether view automatically resizes to show all content.
+ 
+ */
+@property (assign, nonatomic) TSAutoContentSize autoContentSizeOptions;
 
 /*
  

@@ -46,10 +46,20 @@ Usage
     	[self.stackView resumeAutoLayoutWhenSubviewVisibilityChanges];
 	}
 
+Auto Content Size Options
+==============================
+
+A TSStackView instance can optionally resize to match its content. This is useful when displaying an expanding list that should not clip e.g: a list of optional email addresses. Both height and width auto content sizes are supported.
+
+    // StackView will resize 
+    self.stackView.autoContentSizeOptions = TSAutoContentSizeHeight;
+    
 Intrinsic Content Size Options
 ==============================
 
-NSStackView has no intrinsic content size. A TSStackView instance can optionally report an intrinsic content size equal to the unclipped content size of all visible views. This is useful when displaying an expanding list that should not clip e.g: a list of optional email addresses. Both height and width intrinsic content sizes are supported.
+This is implemented but -autoContentSizeOptions should be preferred.
+
+NSStackView has no intrinsic content size. A TSStackView instance can optionally report an intrinsic content size equal to the unclipped content size of all visible views. 
 
     // StackView will report an intrinsic height equal to the combined height of all the contained views
     // plus the edge insets and view spacings (default or custom).
