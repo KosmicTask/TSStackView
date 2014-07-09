@@ -168,7 +168,7 @@ char BPContextHidden;
 
 - (void)removeViewObservation:(NSView *)view
 {
-    [view removeObserver:self forKeyPath:@"hidden"];
+    [view removeObserver:self forKeyPath:@"hidden" context:&BPContextHidden];
 }
 
 - (void)removeViewObservations:(NSArray *)views
