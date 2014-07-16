@@ -72,9 +72,7 @@ char BPContextHidden;
 
 - (void)dealloc
 {
-    [self removeViewObservations:self.observedViews[@(NSStackViewGravityTop)]];
-    [self removeViewObservations:self.observedViews[@(NSStackViewGravityCenter)]];
-    [self removeViewObservations:self.observedViews[@(NSStackViewGravityBottom)]];
+    [self removeAllViewObservations];
 }
 
 #pragma mark -
@@ -176,6 +174,13 @@ char BPContextHidden;
     for (NSView *view in views) {
         [self removeViewObservation:view];
     }
+}
+
+- (void)removeAllViewObservations
+{
+    [self removeViewObservations:self.observedViews[@(NSStackViewGravityTop)]];
+    [self removeViewObservations:self.observedViews[@(NSStackViewGravityCenter)]];
+    [self removeViewObservations:self.observedViews[@(NSStackViewGravityBottom)]];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
@@ -351,12 +356,9 @@ char BPContextHidden;
 {
     if (!aView.isHidden) {
         [super addView:aView inGravity:gravity];
+    } else {
+        [self commitView:aView inGravity:gravity];
     }
-    
-    [self.observedViews[@(gravity)] addObject:aView];
-    [self addViewObservation:aView];
-    
-    [self invalidateContentSize];
 }
 
 - (void)insertView:(NSView *)aView atIndex:(NSUInteger)index inGravity:(NSStackViewGravity)gravity
@@ -365,30 +367,63 @@ char BPContextHidden;
         [super insertView:aView atIndex:index inGravity:gravity];
     }
     
+    [self commitView:aView inGravity:gravity];
+}
+
+- (void)commitView:(NSView *)aView inGravity:(NSStackViewGravity)gravity
+{
+    NSAssert(![self.observedViews[@(gravity)] containsObject:aView], @"View already observed");
+    
     [self.observedViews[@(gravity)] addObject:aView];
     [self addViewObservation:aView];
-
+    
     [self invalidateContentSize];
 }
 
 - (void)removeView:(NSView *)aView
 {
+    BOOL viewRemoved = NO;
+    
     for (NSUInteger gravity = NSStackViewGravityTop; gravity <= NSStackViewGravityBottom; gravity++) {
-        if ([[self viewsInGravity:gravity] containsObject:aView]) {
-            [super removeView:aView];
+        
+        NSMutableArray *observedViews = self.observedViews[@(gravity)];
+        if ([observedViews containsObject:aView]) {
             [self removeViewObservation:aView];
-            [self.observedViews[@(gravity)] removeObject:aView];
+            [super removeView:aView];
+            [observedViews removeObject:aView];
+            
+            viewRemoved = YES;
+            
+            break;
         }
+        
+    }
+    
+    if (!viewRemoved) {
+        NSLog(@"View not found in stack.");
     }
     
     [self invalidateContentSize];
 }
 
-- (void)removeAllViews
+- (void)removeViews:(NSArray *)views
 {
-    for (NSView *view in [self.views copy]) {
+    for (NSView *view in views) {
         [self removeView:view];
     }
+}
+
+- (void)removeAllViews
+{
+    for (NSUInteger gravity = NSStackViewGravityTop; gravity <= NSStackViewGravityBottom; gravity++) {
+        NSArray *views = [self.observedViews[@(gravity)] copy];
+        [self removeViews:views];
+        
+        NSAssert([(NSArray *)self.observedViews[@(gravity)] count] == 0, @"observed views should be 0");
+    }
+    
+    
+
 }
 
 #pragma mark -
