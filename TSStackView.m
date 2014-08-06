@@ -34,10 +34,31 @@ char BPContextHidden;
 
 + (id) stackViewWithViews:(NSArray *)views
 {
+    views = [self flattenViews:views];
+    
     // the super call guarantees that self.translatesAutoresizingMaskIntoConstraints == NO
     [self ts_disableTranslatesAutoresizingMaskIntoConstraints:views];
     NSStackView *stackView = [super stackViewWithViews:views];
     return stackView;
+}
+
+#pragma mark -
+#pragma mark Flat stuff
+
++ (NSArray *)flattenViews:(NSArray *)views
+{
+    NSMutableArray *flatViews = [NSMutableArray arrayWithCapacity:[views count]];
+    for (id object in views) {
+        if ([object isKindOfClass:[NSView class]]) {
+            [flatViews addObject:object];
+        } else if ([object isKindOfClass:[NSArray class]]) {
+            [flatViews addObjectsFromArray:[self flattenViews:object]];
+        } else {
+            NSLog(@"Cannot flatten this : %@", object);
+        }
+    }
+    
+    return flatViews;
 }
 
 #pragma mark -
