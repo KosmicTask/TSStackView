@@ -143,7 +143,7 @@ char BPContextHidden;
 
 - (void)showViews:(NSArray *)views
 {
-    for (NSView *view in views) view.hidden = YES;
+    for (NSView *view in views) view.hidden = NO;
 }
 
 - (void)hideViews:(NSArray *)views
