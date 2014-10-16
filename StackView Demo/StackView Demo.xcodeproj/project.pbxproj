@@ -1,0 +1,509 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AB4EA0A019F0677C00FD4B60 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB4EA09F19F0677C00FD4B60 /* Cocoa.framework */; };
+		AB4EA0AA19F0677C00FD4B60 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AB4EA0A819F0677C00FD4B60 /* InfoPlist.strings */; };
+		AB4EA0AC19F0677C00FD4B60 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AB4EA0AB19F0677C00FD4B60 /* main.m */; };
+		AB4EA0B019F0677C00FD4B60 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = AB4EA0AE19F0677C00FD4B60 /* Credits.rtf */; };
+		AB4EA0B319F0677C00FD4B60 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AB4EA0B219F0677C00FD4B60 /* AppDelegate.m */; };
+		AB4EA0B619F0677C00FD4B60 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB4EA0B419F0677C00FD4B60 /* MainMenu.xib */; };
+		AB4EA0B819F0677C00FD4B60 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB4EA0B719F0677C00FD4B60 /* Images.xcassets */; };
+		AB4EA0BF19F0677D00FD4B60 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB4EA0BE19F0677D00FD4B60 /* XCTest.framework */; };
+		AB4EA0C019F0677D00FD4B60 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB4EA09F19F0677C00FD4B60 /* Cocoa.framework */; };
+		AB4EA0C819F0677D00FD4B60 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AB4EA0C619F0677D00FD4B60 /* InfoPlist.strings */; };
+		AB4EA0CA19F0677D00FD4B60 /* StackView_DemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AB4EA0C919F0677D00FD4B60 /* StackView_DemoTests.m */; };
+		AB4EA0D719F0679B00FD4B60 /* TSClipView.m in Sources */ = {isa = PBXBuildFile; fileRef = AB4EA0D419F0679B00FD4B60 /* TSClipView.m */; };
+		AB4EA0D819F0679B00FD4B60 /* TSStackView.m in Sources */ = {isa = PBXBuildFile; fileRef = AB4EA0D619F0679B00FD4B60 /* TSStackView.m */; };
+		AB4EA0DC19F067F200FD4B60 /* TSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB4EA0DA19F067F200FD4B60 /* TSViewController.m */; };
+		AB4EA0DD19F067F200FD4B60 /* TSViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB4EA0DB19F067F200FD4B60 /* TSViewController.xib */; };
+		AB4EA0E019F0694000FD4B60 /* TSTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = AB4EA0DF19F0694000FD4B60 /* TSTextView.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		AB4EA0C119F0677D00FD4B60 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AB4EA09419F0677C00FD4B60 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AB4EA09B19F0677C00FD4B60;
+			remoteInfo = "StackView Demo";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		AB4EA09C19F0677C00FD4B60 /* StackView Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "StackView Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB4EA09F19F0677C00FD4B60 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		AB4EA0A219F0677C00FD4B60 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		AB4EA0A319F0677C00FD4B60 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		AB4EA0A419F0677C00FD4B60 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		AB4EA0A719F0677C00FD4B60 /* StackView Demo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "StackView Demo-Info.plist"; sourceTree = "<group>"; };
+		AB4EA0A919F0677C00FD4B60 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AB4EA0AB19F0677C00FD4B60 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		AB4EA0AD19F0677C00FD4B60 /* StackView Demo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "StackView Demo-Prefix.pch"; sourceTree = "<group>"; };
+		AB4EA0AF19F0677C00FD4B60 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		AB4EA0B119F0677C00FD4B60 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		AB4EA0B219F0677C00FD4B60 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		AB4EA0B519F0677C00FD4B60 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		AB4EA0B719F0677C00FD4B60 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		AB4EA0BD19F0677D00FD4B60 /* StackView DemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "StackView DemoTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB4EA0BE19F0677D00FD4B60 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		AB4EA0C519F0677D00FD4B60 /* StackView DemoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "StackView DemoTests-Info.plist"; sourceTree = "<group>"; };
+		AB4EA0C719F0677D00FD4B60 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AB4EA0C919F0677D00FD4B60 /* StackView_DemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StackView_DemoTests.m; sourceTree = "<group>"; };
+		AB4EA0D319F0679B00FD4B60 /* TSClipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSClipView.h; path = ../../TSClipView.h; sourceTree = "<group>"; };
+		AB4EA0D419F0679B00FD4B60 /* TSClipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSClipView.m; path = ../../TSClipView.m; sourceTree = "<group>"; };
+		AB4EA0D519F0679B00FD4B60 /* TSStackView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSStackView.h; path = ../../TSStackView.h; sourceTree = "<group>"; };
+		AB4EA0D619F0679B00FD4B60 /* TSStackView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSStackView.m; path = ../../TSStackView.m; sourceTree = "<group>"; };
+		AB4EA0D919F067F200FD4B60 /* TSViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSViewController.h; sourceTree = "<group>"; };
+		AB4EA0DA19F067F200FD4B60 /* TSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSViewController.m; sourceTree = "<group>"; };
+		AB4EA0DB19F067F200FD4B60 /* TSViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TSViewController.xib; sourceTree = "<group>"; };
+		AB4EA0DE19F0694000FD4B60 /* TSTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTextView.h; sourceTree = "<group>"; };
+		AB4EA0DF19F0694000FD4B60 /* TSTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTextView.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AB4EA09919F0677C00FD4B60 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AB4EA0A019F0677C00FD4B60 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AB4EA0BA19F0677D00FD4B60 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AB4EA0C019F0677D00FD4B60 /* Cocoa.framework in Frameworks */,
+				AB4EA0BF19F0677D00FD4B60 /* XCTest.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AB4EA09319F0677C00FD4B60 = {
+			isa = PBXGroup;
+			children = (
+				AB4EA0A519F0677C00FD4B60 /* StackView Demo */,
+				AB4EA0C319F0677D00FD4B60 /* StackView DemoTests */,
+				AB4EA09E19F0677C00FD4B60 /* Frameworks */,
+				AB4EA09D19F0677C00FD4B60 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AB4EA09D19F0677C00FD4B60 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AB4EA09C19F0677C00FD4B60 /* StackView Demo.app */,
+				AB4EA0BD19F0677D00FD4B60 /* StackView DemoTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AB4EA09E19F0677C00FD4B60 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AB4EA09F19F0677C00FD4B60 /* Cocoa.framework */,
+				AB4EA0BE19F0677D00FD4B60 /* XCTest.framework */,
+				AB4EA0A119F0677C00FD4B60 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AB4EA0A119F0677C00FD4B60 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AB4EA0A219F0677C00FD4B60 /* AppKit.framework */,
+				AB4EA0A319F0677C00FD4B60 /* CoreData.framework */,
+				AB4EA0A419F0677C00FD4B60 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		AB4EA0A519F0677C00FD4B60 /* StackView Demo */ = {
+			isa = PBXGroup;
+			children = (
+				AB4EA0D319F0679B00FD4B60 /* TSClipView.h */,
+				AB4EA0D419F0679B00FD4B60 /* TSClipView.m */,
+				AB4EA0D519F0679B00FD4B60 /* TSStackView.h */,
+				AB4EA0D619F0679B00FD4B60 /* TSStackView.m */,
+				AB4EA0B119F0677C00FD4B60 /* AppDelegate.h */,
+				AB4EA0B219F0677C00FD4B60 /* AppDelegate.m */,
+				AB4EA0B419F0677C00FD4B60 /* MainMenu.xib */,
+				AB4EA0B719F0677C00FD4B60 /* Images.xcassets */,
+				AB4EA0A619F0677C00FD4B60 /* Supporting Files */,
+				AB4EA0D919F067F200FD4B60 /* TSViewController.h */,
+				AB4EA0DA19F067F200FD4B60 /* TSViewController.m */,
+				AB4EA0DB19F067F200FD4B60 /* TSViewController.xib */,
+				AB4EA0DE19F0694000FD4B60 /* TSTextView.h */,
+				AB4EA0DF19F0694000FD4B60 /* TSTextView.m */,
+			);
+			path = "StackView Demo";
+			sourceTree = "<group>";
+		};
+		AB4EA0A619F0677C00FD4B60 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				AB4EA0A719F0677C00FD4B60 /* StackView Demo-Info.plist */,
+				AB4EA0A819F0677C00FD4B60 /* InfoPlist.strings */,
+				AB4EA0AB19F0677C00FD4B60 /* main.m */,
+				AB4EA0AD19F0677C00FD4B60 /* StackView Demo-Prefix.pch */,
+				AB4EA0AE19F0677C00FD4B60 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AB4EA0C319F0677D00FD4B60 /* StackView DemoTests */ = {
+			isa = PBXGroup;
+			children = (
+				AB4EA0C919F0677D00FD4B60 /* StackView_DemoTests.m */,
+				AB4EA0C419F0677D00FD4B60 /* Supporting Files */,
+			);
+			path = "StackView DemoTests";
+			sourceTree = "<group>";
+		};
+		AB4EA0C419F0677D00FD4B60 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				AB4EA0C519F0677D00FD4B60 /* StackView DemoTests-Info.plist */,
+				AB4EA0C619F0677D00FD4B60 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AB4EA09B19F0677C00FD4B60 /* StackView Demo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AB4EA0CD19F0677D00FD4B60 /* Build configuration list for PBXNativeTarget "StackView Demo" */;
+			buildPhases = (
+				AB4EA09819F0677C00FD4B60 /* Sources */,
+				AB4EA09919F0677C00FD4B60 /* Frameworks */,
+				AB4EA09A19F0677C00FD4B60 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "StackView Demo";
+			productName = "StackView Demo";
+			productReference = AB4EA09C19F0677C00FD4B60 /* StackView Demo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		AB4EA0BC19F0677D00FD4B60 /* StackView DemoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AB4EA0D019F0677D00FD4B60 /* Build configuration list for PBXNativeTarget "StackView DemoTests" */;
+			buildPhases = (
+				AB4EA0B919F0677D00FD4B60 /* Sources */,
+				AB4EA0BA19F0677D00FD4B60 /* Frameworks */,
+				AB4EA0BB19F0677D00FD4B60 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AB4EA0C219F0677D00FD4B60 /* PBXTargetDependency */,
+			);
+			name = "StackView DemoTests";
+			productName = "StackView DemoTests";
+			productReference = AB4EA0BD19F0677D00FD4B60 /* StackView DemoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AB4EA09419F0677C00FD4B60 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "Thesaurus Software";
+				TargetAttributes = {
+					AB4EA0BC19F0677D00FD4B60 = {
+						TestTargetID = AB4EA09B19F0677C00FD4B60;
+					};
+				};
+			};
+			buildConfigurationList = AB4EA09719F0677C00FD4B60 /* Build configuration list for PBXProject "StackView Demo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = AB4EA09319F0677C00FD4B60;
+			productRefGroup = AB4EA09D19F0677C00FD4B60 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AB4EA09B19F0677C00FD4B60 /* StackView Demo */,
+				AB4EA0BC19F0677D00FD4B60 /* StackView DemoTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AB4EA09A19F0677C00FD4B60 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AB4EA0DD19F067F200FD4B60 /* TSViewController.xib in Resources */,
+				AB4EA0AA19F0677C00FD4B60 /* InfoPlist.strings in Resources */,
+				AB4EA0B819F0677C00FD4B60 /* Images.xcassets in Resources */,
+				AB4EA0B019F0677C00FD4B60 /* Credits.rtf in Resources */,
+				AB4EA0B619F0677C00FD4B60 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AB4EA0BB19F0677D00FD4B60 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AB4EA0C819F0677D00FD4B60 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AB4EA09819F0677C00FD4B60 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AB4EA0D819F0679B00FD4B60 /* TSStackView.m in Sources */,
+				AB4EA0B319F0677C00FD4B60 /* AppDelegate.m in Sources */,
+				AB4EA0E019F0694000FD4B60 /* TSTextView.m in Sources */,
+				AB4EA0AC19F0677C00FD4B60 /* main.m in Sources */,
+				AB4EA0D719F0679B00FD4B60 /* TSClipView.m in Sources */,
+				AB4EA0DC19F067F200FD4B60 /* TSViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AB4EA0B919F0677D00FD4B60 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AB4EA0CA19F0677D00FD4B60 /* StackView_DemoTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		AB4EA0C219F0677D00FD4B60 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AB4EA09B19F0677C00FD4B60 /* StackView Demo */;
+			targetProxy = AB4EA0C119F0677D00FD4B60 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		AB4EA0A819F0677C00FD4B60 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AB4EA0A919F0677C00FD4B60 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		AB4EA0AE19F0677C00FD4B60 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AB4EA0AF19F0677C00FD4B60 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		AB4EA0B419F0677C00FD4B60 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AB4EA0B519F0677C00FD4B60 /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		AB4EA0C619F0677D00FD4B60 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AB4EA0C719F0677D00FD4B60 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		AB4EA0CB19F0677D00FD4B60 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		AB4EA0CC19F0677D00FD4B60 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		AB4EA0CE19F0677D00FD4B60 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "StackView Demo/StackView Demo-Prefix.pch";
+				INFOPLIST_FILE = "StackView Demo/StackView Demo-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		AB4EA0CF19F0677D00FD4B60 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "StackView Demo/StackView Demo-Prefix.pch";
+				INFOPLIST_FILE = "StackView Demo/StackView Demo-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		AB4EA0D119F0677D00FD4B60 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/StackView Demo.app/Contents/MacOS/StackView Demo";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "StackView Demo/StackView Demo-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "StackView DemoTests/StackView DemoTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		AB4EA0D219F0677D00FD4B60 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/StackView Demo.app/Contents/MacOS/StackView Demo";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "StackView Demo/StackView Demo-Prefix.pch";
+				INFOPLIST_FILE = "StackView DemoTests/StackView DemoTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AB4EA09719F0677C00FD4B60 /* Build configuration list for PBXProject "StackView Demo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AB4EA0CB19F0677D00FD4B60 /* Debug */,
+				AB4EA0CC19F0677D00FD4B60 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AB4EA0CD19F0677D00FD4B60 /* Build configuration list for PBXNativeTarget "StackView Demo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AB4EA0CE19F0677D00FD4B60 /* Debug */,
+				AB4EA0CF19F0677D00FD4B60 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		AB4EA0D019F0677D00FD4B60 /* Build configuration list for PBXNativeTarget "StackView DemoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AB4EA0D119F0677D00FD4B60 /* Debug */,
+				AB4EA0D219F0677D00FD4B60 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AB4EA09419F0677C00FD4B60 /* Project object */;
+}

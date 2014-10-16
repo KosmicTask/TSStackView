@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="TSViewController">
+            <connections>
+                <outlet property="auxiliaryView" destination="UP6-Hx-IbN" id="CIJ-5S-cMo"/>
+                <outlet property="textView" destination="Ea4-jd-RIv" id="eRi-6K-AeA"/>
+                <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application"/>
+        <customView translatesAutoresizingMaskIntoConstraints="NO" id="Hz6-mo-xeY">
+            <rect key="frame" x="0.0" y="0.0" width="426" height="50"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="Ea4-jd-RIv" customClass="TSTextView">
+                    <rect key="frame" x="5" y="5" width="416" height="40"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="24" id="d2H-Ss-xQb"/>
+                    </constraints>
+                </customView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="Ea4-jd-RIv" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="5" id="5ja-2O-RjA"/>
+                <constraint firstAttribute="trailing" secondItem="Ea4-jd-RIv" secondAttribute="trailing" constant="5" id="7LZ-CA-u06"/>
+                <constraint firstAttribute="bottom" secondItem="Ea4-jd-RIv" secondAttribute="bottom" constant="5" id="K9u-Pr-Xqn"/>
+                <constraint firstItem="Ea4-jd-RIv" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="5" id="y4u-ES-Z4h"/>
+            </constraints>
+        </customView>
+        <textView importsGraphics="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="eyH-qo-mJj" customClass="TSTextView">
+            <rect key="frame" x="0.0" y="0.0" width="458" height="79"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <size key="minSize" width="458" height="79"/>
+            <size key="maxSize" width="463" height="10000000"/>
+            <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+            <size key="minSize" width="458" height="79"/>
+            <size key="maxSize" width="463" height="10000000"/>
+        </textView>
+        <customView id="UP6-Hx-IbN">
+            <rect key="frame" x="0.0" y="0.0" width="436" height="28"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rGf-yC-Mbx">
+                    <rect key="frame" x="377" y="4" width="54" height="19"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="roundRect" title="Toggle" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="5gj-Kq-VCO">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="controlContent"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="toggleView:" target="-2" id="zUk-tN-yul"/>
+                    </connections>
+                </button>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qP1-c7-5EL">
+                    <rect key="frame" x="248" y="7" width="123" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Text view visibility:" id="hiV-fi-My3">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="rGf-yC-Mbx" secondAttribute="trailing" constant="5" id="5df-jn-p9M"/>
+                <constraint firstItem="rGf-yC-Mbx" firstAttribute="top" secondItem="UP6-Hx-IbN" secondAttribute="top" constant="5" id="JqJ-aw-FwI"/>
+                <constraint firstItem="rGf-yC-Mbx" firstAttribute="leading" secondItem="qP1-c7-5EL" secondAttribute="trailing" constant="8" id="jbc-0x-m7L"/>
+                <constraint firstAttribute="bottom" secondItem="rGf-yC-Mbx" secondAttribute="bottom" constant="5" id="ofS-RQ-mLc"/>
+                <constraint firstItem="rGf-yC-Mbx" firstAttribute="baseline" secondItem="qP1-c7-5EL" secondAttribute="baseline" id="ozd-FR-NVk"/>
+            </constraints>
+        </customView>
+    </objects>
+</document>
