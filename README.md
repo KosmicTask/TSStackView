@@ -7,6 +7,8 @@ The subclass retains all views passed to `setViews:inGravity` and performs layou
 
 The `-scrollViewContainer` property can be used to create and retrieve a `NSScrollView` instance that wraps the stack view.
 
+A simple demo project illustrates a stack of vertically expanding `NSTextViews` embedded in an `NSScrollView`.
+
 Usage
 =====
 
