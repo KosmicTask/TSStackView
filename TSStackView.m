@@ -376,6 +376,7 @@ char BPContextHidden;
 - (void)addView:(NSView *)aView inGravity:(NSStackViewGravity)gravity
 {
     if (!aView.isHidden) {
+        // this will call -insertView:atIndex:inGravity:
         [super addView:aView inGravity:gravity];
     } else {
         [self commitView:aView inGravity:gravity];
@@ -393,9 +394,15 @@ char BPContextHidden;
 
 - (void)commitView:(NSView *)aView inGravity:(NSStackViewGravity)gravity
 {
-    NSAssert(![self.observedViews[@(gravity)] containsObject:aView], @"View already observed");
+    NSMutableArray *observedViews = self.observedViews[@(gravity)];
+    if (!observedViews) {
+        self.observedViews[@(gravity)] = [NSMutableArray arrayWithCapacity:3];
+        observedViews = self.observedViews[@(gravity)];
+    }
     
-    [self.observedViews[@(gravity)] addObject:aView];
+    NSAssert(![observedViews containsObject:aView], @"View already observed");
+    
+    [observedViews addObject:aView];
     [self addViewObservation:aView];
     
     [self invalidateContentSize];
