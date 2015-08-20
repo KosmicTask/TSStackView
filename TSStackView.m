@@ -319,12 +319,20 @@ char BPContextHidden;
     
     /*
      
+     We constrain to self here.
+     This generally works but problems can arise if we try and use edge insets too.
+     
+     */
+    NSView *stackViewContainer = self;
+    
+    /*
+     
      Constrain the last subview to the bottom of the view
      
      */
     if (self.autoContentSizeOptions & TSAutoContentSizeHeight) {
         
-      self.autoContentHeightConstraint = [NSLayoutConstraint constraintWithItem:lastView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1.0 constant:self.edgeInsets.bottom];
+      self.autoContentHeightConstraint = [NSLayoutConstraint constraintWithItem:lastView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:stackViewContainer attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0];
         
         [self addConstraint:self.autoContentHeightConstraint];
         
@@ -337,7 +345,7 @@ char BPContextHidden;
      */
     if (self.autoContentSizeOptions & TSAutoContentSizeWidth) {
         
-        self.autoContentWidthConstraint = [NSLayoutConstraint constraintWithItem:lastView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeRight multiplier:1.0 constant:self.edgeInsets.right];
+        self.autoContentWidthConstraint = [NSLayoutConstraint constraintWithItem:lastView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:stackViewContainer attribute:NSLayoutAttributeRight multiplier:1.0 constant:0];
         
         [self addConstraint:self.autoContentWidthConstraint];
     }
