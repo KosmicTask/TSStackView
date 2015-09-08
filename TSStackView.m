@@ -36,7 +36,7 @@ char BPContextHidden;
 {
     views = [self flattenViews:views];
     
-    // the super call guarantees that self.translatesAutoresizingMaskIntoConstraints == NO
+    // the super call apparently guarantees that self.translatesAutoresizingMaskIntoConstraints == NO
     [self ts_disableTranslatesAutoresizingMaskIntoConstraints:views];
     NSStackView *stackView = [super stackViewWithViews:views];
     return stackView;
@@ -383,6 +383,8 @@ char BPContextHidden;
 
 - (void)addView:(NSView *)aView inGravity:(NSStackViewGravity)gravity
 {
+    [self ts_disableTranslatesAutoresizingMaskIntoConstraints:@[aView]];
+    
     if (!aView.isHidden) {
         // this will call -insertView:atIndex:inGravity:
         [super addView:aView inGravity:gravity];
@@ -391,8 +393,17 @@ char BPContextHidden;
     }
 }
 
+- (void)addViews:(NSArray *)views inGravity:(NSStackViewGravity)gravity
+{
+    for (NSView *view in views) {
+        [self addView:view inGravity:gravity];
+    }
+}
+
 - (void)insertView:(NSView *)aView atIndex:(NSUInteger)index inGravity:(NSStackViewGravity)gravity
 {
+    [self ts_disableTranslatesAutoresizingMaskIntoConstraints:@[aView]];
+    
     if (!aView.isHidden) {
         [super insertView:aView atIndex:index inGravity:gravity];
     }

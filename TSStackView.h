@@ -77,6 +77,14 @@ typedef NS_OPTIONS(NSUInteger, TSAutoContentSize) {
 
 /*!
  
+ add views
+ 
+ */
+
+- (void)addViews:(NSArray *)views inGravity:(NSStackViewGravity)gravity;
+
+/*!
+ 
  Show views
  
  */
