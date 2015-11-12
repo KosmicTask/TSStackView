@@ -43,6 +43,14 @@ typedef NS_OPTIONS(NSUInteger, TSAutoContentSize) {
  2. Add and remove additional external zero dimension constraints to override the internal constraints.
  
  */
+
+/*!
+ 
+ Create receiver with initial views in gravity.
+ 
+ */
++ (id)stackViewWithViews:(NSArray *)views inGravity:(NSStackViewGravity)gravity;
+
 /*!
  
  Suspend auto layout triggered by change in subview visibility.

@@ -32,13 +32,27 @@ char BPContextHidden;
 #pragma mark -
 #pragma mark Factory
 
-+ (id) stackViewWithViews:(NSArray *)views
++ (id)stackViewWithViews:(NSArray *)views
+{
+    return [self stackViewWithViews:views inGravity:NSStackViewGravityLeading];
+}
+
++ (id)stackViewWithViews:(NSArray *)views inGravity:(NSStackViewGravity)gravity
 {
     views = [self flattenViews:views];
     
     // the super call apparently guarantees that self.translatesAutoresizingMaskIntoConstraints == NO
     [self ts_disableTranslatesAutoresizingMaskIntoConstraints:views];
-    NSStackView *stackView = [super stackViewWithViews:views];
+    
+    NSArray *leadingViews = nil;
+    if (gravity == NSStackViewGravityLeading) {
+        leadingViews = views;
+        views = nil;
+    }
+    TSStackView *stackView = [super stackViewWithViews:leadingViews];
+    if (views) {
+        [stackView addViews:views inGravity:gravity];
+    }
     return stackView;
 }
 
