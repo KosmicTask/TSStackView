@@ -111,7 +111,7 @@ typedef NS_OPTIONS(NSUInteger, TSAutoContentSize) {
  Scroll view container with constraints to match the stackview width to the scrollview width.
  
  */
-@property (strong, nonatomic, readonly) NSScrollView *scrollViewContainer;
+- (NSScrollView *)scrollViewContainer;
 
 /*!
  

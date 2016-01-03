@@ -22,9 +22,9 @@ char BPContextHidden;
 @property (strong) NSMutableDictionary *observedViews;
 @property BOOL doLayout;
 @property (strong) NSArray *stackViewConstraints;
-@property (strong, nonatomic, readwrite) NSScrollView *scrollViewContainer;
 @property (strong) NSLayoutConstraint *autoContentHeightConstraint;
 @property (strong) NSLayoutConstraint *autoContentWidthConstraint;
+@property (assign) BOOL scrollViewAllocated;
 @end
 
 @implementation TSStackView
@@ -316,9 +316,6 @@ char BPContextHidden;
 }
 
 #pragma mark -
-#pragma mark Accessors
-
-#pragma mark -
 #pragma mark Auto content size
 
 - (void)updateAutoContentSizeConstraints
@@ -491,10 +488,16 @@ char BPContextHidden;
 #pragma mark Embedding
 - (NSScrollView *)scrollViewContainer
 {
-    if (!_scrollViewContainer) {
+    NSScrollView *scrollView = nil;
+    
+    if (self.scrollViewAllocated) {
+        scrollView = [self enclosingScrollView];
+    }
+    else {
+        self.scrollViewAllocated = YES;
         
         // allocate scroll view
-        NSScrollView *scrollView = [[NSScrollView alloc] initWithFrame:NSMakeRect(0, 0, 100, 100)];
+        scrollView = [[NSScrollView alloc] initWithFrame:NSMakeRect(0, 0, 100, 100)];
         scrollView.translatesAutoresizingMaskIntoConstraints = NO;
 
         // allocate flipped clip view
@@ -522,10 +525,9 @@ char BPContextHidden;
         self.stackViewConstraints = [NSLayoutConstraint constraintsWithVisualFormat:vfl options:0 metrics:nil views:viewsDict];
         
         [scrollView addConstraints:self.stackViewConstraints];
-        
-        self.scrollViewContainer = scrollView;
     }
-    return _scrollViewContainer;
+    
+    return scrollView;
 }
 
 #pragma mark -
