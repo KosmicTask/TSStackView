@@ -189,7 +189,7 @@ char BPContextHidden;
 
 - (void)addViewObservation:(NSView *)view
 {
-    [view addObserver:self forKeyPath:@"hidden" options:nil context:&BPContextHidden];
+    [view addObserver:self forKeyPath:@"hidden" options:0 context:&BPContextHidden];
 }
 
 - (void)addViewObservations:(NSArray *)views
