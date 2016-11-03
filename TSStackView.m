@@ -447,7 +447,9 @@ char BPContextHidden;
         NSMutableArray *observedViews = self.observedViews[@(gravity)];
         if ([observedViews containsObject:aView]) {
             [self removeViewObservation:aView];
-            [super removeView:aView];
+            if (!aView.hidden) {
+                [super removeView:aView];
+            }
             [observedViews removeObject:aView];
             
             viewRemoved = YES;
