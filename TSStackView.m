@@ -406,6 +406,7 @@ char BPContextHidden;
 
 - (void)addViews:(NSArray *)views inGravity:(NSStackViewGravity)gravity
 {
+    views = [self.class flattenViews:views];
     for (NSView *view in views) {
         [self addView:view inGravity:gravity];
     }
