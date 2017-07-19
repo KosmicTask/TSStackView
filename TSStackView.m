@@ -512,8 +512,8 @@ char BPContextHidden;
         scrollView.borderType = NSNoBorder;
         scrollView.hasHorizontalScroller = YES;
         scrollView.hasVerticalScroller = YES;
-        scrollView.autohidesScrollers = YES;
-        
+        scrollView.autohidesScrollers = YES; // has no effect when scrollView.scrollerStyle == NSScrollerStyleOverlay
+
         // stackview is the document
         scrollView.documentView = self;
         
