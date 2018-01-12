@@ -142,6 +142,24 @@ char BPContextHidden;
     return self.observedViews[@(gravity)];
 }
 
+- (NSArray *)allViewsInGravity:(NSStackViewGravity)gravity
+{
+    return self.observedViews[@(gravity)];
+}
+
+- (NSArray *)allViews
+{
+    NSMutableArray *allViews = [NSMutableArray arrayWithCapacity:3];
+    for (id i in @[@(NSStackViewGravityTop), @(NSStackViewGravityCenter), @(NSStackViewGravityBottom)]) {
+        NSArray *views = self.observedViews[i];
+        if (views) {
+            [allViews addObjectsFromArray:views];
+        }
+    }
+    
+    return allViews;
+}
+
 #pragma mark -
 #pragma mark Visibility
 

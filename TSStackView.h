@@ -134,4 +134,6 @@ typedef NS_OPTIONS(NSUInteger, TSAutoContentSize) {
  */
 - (void)removeAllViews;
 
+- (NSArray<NSView *> *)allViews;
+
 @end
