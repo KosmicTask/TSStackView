@@ -418,7 +418,7 @@ char BPContextHidden;
         // this will call -insertView:atIndex:inGravity:
         [super addView:aView inGravity:gravity];
     } else {
-        [self commitView:aView inGravity:gravity];
+        [self commitView:aView atIndex:NSNotFound inGravity:gravity];
     }
 }
 
@@ -438,10 +438,10 @@ char BPContextHidden;
         [super insertView:aView atIndex:index inGravity:gravity];
     }
     
-    [self commitView:aView inGravity:gravity];
+    [self commitView:aView atIndex:index inGravity:gravity];
 }
 
-- (void)commitView:(NSView *)aView inGravity:(NSStackViewGravity)gravity
+- (void)commitView:(NSView *)aView atIndex:(NSUInteger)index inGravity:(NSStackViewGravity)gravity
 {
     NSMutableArray *observedViews = self.observedViews[@(gravity)];
     if (!observedViews) {
@@ -451,7 +451,35 @@ char BPContextHidden;
     
     NSAssert(![observedViews containsObject:aView], @"View already observed");
     
-    [observedViews addObject:aView];
+    // if no index specified then commit view has been added to list of observed gravity views.
+    // in this case we simply append the view to the list of observed views.
+    // if the last view in the list is hidden then the commit view will layout after it.
+    if (index == NSNotFound) {
+        [observedViews addObject:aView];
+    }
+    else {
+        // the commit view has been inserted at a specified index.
+        // we will interpret this index relative to the visible views so
+        // that when inserting the view into the observed views collection we must take account
+        // of any preceding views that are currently hidden.
+        NSInteger iVisible = -1;
+        BOOL success = NO;
+        for (NSUInteger i = 0; i < observedViews.count; i++) {
+            NSView *view = observedViews[i];
+            if (!view.hidden) {
+                iVisible++;
+            }
+            if (index == (NSUInteger)iVisible) {
+                [observedViews insertObject:aView atIndex:i];
+                success = YES;
+                break;
+            }
+        }
+        if (!success) {
+            [observedViews addObject:aView];
+        }
+    }
+    
     [self addViewObservation:aView];
     
     [self invalidateContentSize];
@@ -500,13 +528,11 @@ char BPContextHidden;
         
         NSAssert([(NSArray *)self.observedViews[@(gravity)] count] == 0, @"observed views should be 0");
     }
-    
-    
-
 }
 
 #pragma mark -
 #pragma mark Embedding
+
 - (NSScrollView *)scrollViewContainer
 {
     NSScrollView *scrollView = nil;
