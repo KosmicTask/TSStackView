@@ -434,6 +434,11 @@ char BPContextHidden;
 {
     [self ts_disableTranslatesAutoresizingMaskIntoConstraints:@[aView]];
     
+    NSUInteger maxIndex = [self viewsInGravity:gravity].count;
+    if (index > [self viewsInGravity:gravity].count) {
+        index = maxIndex;
+    }
+    
     if (!aView.isHidden) {
         [super insertView:aView atIndex:index inGravity:gravity];
     }
