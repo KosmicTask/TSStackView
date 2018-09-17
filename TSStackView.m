@@ -19,12 +19,20 @@
 char BPContextHidden;
 
 @interface TSStackView ()
+
+// collections
 @property (strong) NSMutableDictionary *observedViews;
-@property BOOL doLayout;
 @property (strong) NSArray *stackViewConstraints;
+@property (strong) NSMutableArray *pendingVisibleViews;
+@property (strong) NSMutableArray *pendingHiddenViews;
+
+// objects
 @property (strong) NSLayoutConstraint *autoContentHeightConstraint;
 @property (strong) NSLayoutConstraint *autoContentWidthConstraint;
+
+// primitives
 @property (assign) BOOL scrollViewAllocated;
+@property BOOL doLayout;
 @end
 
 @implementation TSStackView
@@ -53,6 +61,7 @@ char BPContextHidden;
     if (views) {
         [stackView addViews:views inGravity:gravity];
     }
+    
     return stackView;
 }
 
@@ -100,6 +109,8 @@ char BPContextHidden;
 {
     _observedViews = [NSMutableDictionary new];
     _doLayout = YES;
+    _pendingVisibleViews = [NSMutableArray arrayWithCapacity:3];
+    _pendingHiddenViews = [NSMutableArray arrayWithCapacity:3];
 }
 
 #pragma mark -
@@ -122,6 +133,31 @@ char BPContextHidden;
     }
     [super setViews:visibleViews inGravity:gravity];
     
+    // call block on views pending visibility change
+    for (NSView *view in views) {
+        
+        if (!view.hidden) {
+            if ([self.pendingVisibleViews containsObject:view]) {
+                [self.pendingVisibleViews removeObject:view];
+                
+                // bound view has become visible
+                if (self.onBoundViewVisible) {
+                    self.onBoundViewVisible(self, view);
+                }
+            }
+        }
+        else {
+            if ([self.pendingHiddenViews containsObject:view]) {
+                [self.pendingHiddenViews removeObject:view];
+                
+                // bound view has been hidden
+                if (self.onBoundViewHidden) {
+                    self.onBoundViewHidden(self, view);
+                }
+            }
+        }
+    }
+     
     [self invalidateContentSize];
 }
 
@@ -207,7 +243,7 @@ char BPContextHidden;
 
 - (void)addViewObservation:(NSView *)view
 {
-    [view addObserver:self forKeyPath:@"hidden" options:0 context:&BPContextHidden];
+    [view addObserver:self forKeyPath:@"hidden" options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld) context:&BPContextHidden];
 }
 
 - (void)addViewObservations:(NSArray *)views
@@ -240,9 +276,26 @@ char BPContextHidden;
 {
     if (context == &BPContextHidden) {
         
+        NSView *view = (NSView *)object;
+        NSAssert([view isKindOfClass:[NSView class]], @"NSView expected");
+        
+        // track the views transition
+        BOOL wasHidden = NO;
+        BOOL isHidden = NO;
+        if (change[NSKeyValueChangeOldKey]) {
+            wasHidden = [change[NSKeyValueChangeOldKey] boolValue];
+        }
+        if (change[NSKeyValueChangeNewKey]) {
+            isHidden = [change[NSKeyValueChangeNewKey] boolValue];
+        }
+        if (wasHidden && !isHidden) {
+            [self.pendingVisibleViews addObject:view];
+        }
+        else if (isHidden && !wasHidden) { 
+            [self.pendingHiddenViews addObject:view];
+        }
+            
         if (self.doLayout) {
-            NSView *view = (NSView *)object;
-            NSAssert([view isKindOfClass:[NSView class]], @"NSView expected");
             
             // get the gravity for the observed view
             NSStackViewGravity gravity = [self gravityForObservedView:view];

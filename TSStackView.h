@@ -136,4 +136,18 @@ typedef NS_OPTIONS(NSUInteger, TSAutoContentSize) {
 
 - (NSArray<NSView *> *)allViews;
 
+/*!
+ 
+ Block to be called when a given bound view becomes visible.
+ 
+ */
+@property (copy) void(^onBoundViewVisible)(TSStackView *stackView, NSView * view);
+
+/*!
+ 
+ Block to be called when a given bound view becomes hidden.
+ 
+ */
+@property (copy) void(^onBoundViewHidden)(TSStackView *stackView, NSView * view);
+
 @end
