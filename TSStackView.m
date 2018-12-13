@@ -283,10 +283,10 @@ char BPContextHidden;
         BOOL wasHidden = NO;
         BOOL isHidden = NO;
         if (change[NSKeyValueChangeOldKey]) {
-            wasHidden = [change[NSKeyValueChangeOldKey] boolValue];
+            wasHidden = [(NSNumber *)change[NSKeyValueChangeOldKey] boolValue];
         }
         if (change[NSKeyValueChangeNewKey]) {
-            isHidden = [change[NSKeyValueChangeNewKey] boolValue];
+            isHidden = [(NSNumber *)change[NSKeyValueChangeNewKey] boolValue];
         }
         if (wasHidden && !isHidden) {
             [self.pendingVisibleViews addObject:view];
