@@ -647,7 +647,7 @@ char BPContextHidden;
 - (void)drawRect:(NSRect)dirtyRect
 {
     if (self.backgroundColor) {
-        [[NSColor whiteColor] set];
+        [self.backgroundColor set];
         NSRectFill(dirtyRect);
     } else {
         [super drawRect:dirtyRect];
