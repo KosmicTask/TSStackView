@@ -111,6 +111,22 @@ char BPContextHidden;
     _doLayout = YES;
     _pendingVisibleViews = [NSMutableArray arrayWithCapacity:3];
     _pendingHiddenViews = [NSMutableArray arrayWithCapacity:3];
+    
+    if (self.class.awakeBlock) {
+        self.class.awakeBlock(self);
+    }
+}
+
+static void(^m_awakeBlock)(TSStackView *);
+
++ (void)setAwakeBlock:(void (^)(TSStackView *))awakeBlock
+{
+    m_awakeBlock = awakeBlock;
+}
+
++ (void (^)(TSStackView *))awakeBlock
+{
+    return m_awakeBlock;
 }
 
 #pragma mark -
@@ -591,6 +607,18 @@ char BPContextHidden;
 #pragma mark -
 #pragma mark Embedding
 
+static void(^m_scrollViewContainerAwakeBlock)(NSScrollView *);
+
++ (void)setScrollViewContainerAwakeBlock:(void (^)(NSScrollView *))scrollViewContainerAwakeBlock
+{
+    m_scrollViewContainerAwakeBlock = scrollViewContainerAwakeBlock;
+}
+
++ (void (^)(NSScrollView *))scrollViewContainerAwakeBlock
+{
+    return m_scrollViewContainerAwakeBlock;
+}
+
 - (NSScrollView *)scrollViewContainer
 {
     NSScrollView *scrollView = nil;
@@ -630,6 +658,10 @@ char BPContextHidden;
         self.stackViewConstraints = [NSLayoutConstraint constraintsWithVisualFormat:vfl options:0 metrics:nil views:viewsDict];
         
         [scrollView addConstraints:self.stackViewConstraints];
+        
+        if (self.class.scrollViewContainerAwakeBlock) {
+            self.class.scrollViewContainerAwakeBlock(scrollView);
+        }
     }
     
     return scrollView;

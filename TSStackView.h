@@ -22,6 +22,16 @@ typedef NS_OPTIONS(NSUInteger, TSAutoContentSize) {
 
 @interface TSStackView : NSStackView
 
+/**
+ A block that will be called when all receiver instances are first instantiated.
+ */
+@property (class, strong)  void (^awakeBlock)(TSStackView *);
+
+/**
+ A block that will be called when all scroll view containers are first instantiated.
+ */
+@property (class, strong)  void (^scrollViewContainerAwakeBlock)(NSScrollView *);
+
 /*!
  
  Set options to determine whether view automatically resizes to show all content.
