@@ -65,7 +65,7 @@ typedef NS_OPTIONS(NSUInteger, TSAutoContentSize) {
  
  Suspend auto layout triggered by change in subview visibility.
  
- Auto layout may be suspended to improve performance when modiftying the visbility of a number of subviews.
+ Auto layout may be suspended to improve performance when modiftying the visibility of a number of subviews.
  
  Must be matched with a call to -resumeAutoLayoutWhenSubviewVisibilityChanges
  
