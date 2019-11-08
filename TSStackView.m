@@ -678,11 +678,10 @@ static void(^m_scrollViewContainerAwakeBlock)(NSScrollView *);
 
 - (void)drawRect:(NSRect)dirtyRect
 {
+    [super drawRect:dirtyRect];
     if (self.backgroundColor) {
         [self.backgroundColor set];
-        NSRectFillUsingOperation(dirtyRect, NSCompositingOperationDestinationOver);
-    } else {
-        [super drawRect:dirtyRect];
+        NSRectFillUsingOperation(dirtyRect, NSCompositeSourceOver);
     }
 }
 
