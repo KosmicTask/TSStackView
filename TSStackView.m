@@ -111,6 +111,7 @@ char BPContextHidden;
     _doLayout = YES;
     _pendingVisibleViews = [NSMutableArray arrayWithCapacity:3];
     _pendingHiddenViews = [NSMutableArray arrayWithCapacity:3];
+    self.wantsLayer = YES;
     
     if (self.class.awakeBlock) {
         self.class.awakeBlock(self);
@@ -668,20 +669,17 @@ static void(^m_scrollViewContainerAwakeBlock)(NSScrollView *);
 }
 
 #pragma mark -
-#pragma mark drawing
+#pragma mark Layer drawing
 
-- (void)setBackgroundColor:(NSColor *)backgroundColor
+- (BOOL)wantsUpdateLayer
 {
-    _backgroundColor = backgroundColor;
-    [self needsDisplay];
+    return YES;
 }
 
-- (void)drawRect:(NSRect)dirtyRect
+- (void)updateLayer
 {
-    [super drawRect:dirtyRect];
     if (self.backgroundColor) {
-        [self.backgroundColor set];
-        NSRectFillUsingOperation(dirtyRect, NSCompositeSourceOver);
+        self.layer.backgroundColor = self.backgroundColor.CGColor;
     }
 }
 
